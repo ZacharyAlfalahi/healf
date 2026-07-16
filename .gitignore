@@ -1,0 +1,21 @@
+# Planning docs and working notes
+/docs/
+/tasks/
+
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# Local model / embedding caches
+.cache/
+
+# OS
+.DS_Store
