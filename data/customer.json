@@ -1,0 +1,14 @@
+{
+  "sex": "female",
+  "age": 26,
+  "diet": "vegetarian (eats dairy and eggs)",
+  "biomarkers": {
+    "ferritin": {"value": 18, "unit": "µg/L", "flag": "low"}
+  },
+  "wearable": {
+    "device": "WHOOP",
+    "note": "recovery mostly yellow for about 3 weeks despite 7.5-8h sleep and good sleep performance"
+  },
+  "goal": "first full-distance Ironman in 5 months; wants to build training strain but feels energy-limited",
+  "habits": "journals and reads every day"
+}

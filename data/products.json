@@ -1,0 +1,128 @@
+[
+  {
+    "id": "iron-vitc",
+    "name": "Gentle Iron + Vitamin C",
+    "pillar": "Nutrition",
+    "ingredients": ["iron (ferrous bisglycinate)", "vitamin c"],
+    "tags": ["vegetarian_ok", "vegan_ok"],
+    "description": "Gentle, non-constipating iron paired with vitamin C to support absorption.",
+    "price": 18.0
+  },
+  {
+    "id": "iron-only",
+    "name": "Iron Bisglycinate",
+    "pillar": "Nutrition",
+    "ingredients": ["iron (ferrous bisglycinate)"],
+    "tags": ["vegetarian_ok", "vegan_ok"],
+    "description": "A gentle, well-absorbed iron with no added vitamin C.",
+    "price": 14.0
+  },
+  {
+    "id": "vitamin-c",
+    "name": "Vitamin C",
+    "pillar": "Nutrition",
+    "ingredients": ["vitamin c"],
+    "tags": ["vegetarian_ok", "vegan_ok"],
+    "description": "A straightforward daily vitamin C.",
+    "price": 10.0
+  },
+  {
+    "id": "creatine",
+    "name": "Creatine Monohydrate",
+    "pillar": "Movement",
+    "ingredients": ["creatine"],
+    "tags": ["vegetarian_ok", "vegan_ok"],
+    "description": "Five grams of creatine monohydrate for strength and recovery.",
+    "price": 22.0
+  },
+  {
+    "id": "whey-protein",
+    "name": "Whey Protein",
+    "pillar": "Movement",
+    "ingredients": ["whey protein"],
+    "tags": ["vegetarian_ok"],
+    "description": "A complete dairy protein for post-training recovery.",
+    "price": 32.0
+  },
+  {
+    "id": "plant-protein",
+    "name": "Plant Protein",
+    "pillar": "Movement",
+    "ingredients": ["pea protein", "rice protein"],
+    "tags": ["vegetarian_ok", "vegan_ok"],
+    "description": "A pea and rice blend for a complete plant-based protein.",
+    "price": 30.0
+  },
+  {
+    "id": "magnesium",
+    "name": "Magnesium Glycinate",
+    "pillar": "Sleep",
+    "ingredients": ["magnesium"],
+    "tags": ["vegetarian_ok", "vegan_ok"],
+    "description": "A gentle, well-absorbed magnesium to support rest.",
+    "price": 16.0
+  },
+  {
+    "id": "electrolytes",
+    "name": "Daily Electrolytes",
+    "pillar": "Movement",
+    "ingredients": ["sodium", "potassium", "magnesium"],
+    "tags": ["vegetarian_ok", "vegan_ok"],
+    "description": "Sugar-free electrolytes for training and hot days.",
+    "price": 24.0
+  },
+  {
+    "id": "omega-3",
+    "name": "Omega-3 Fish Oil",
+    "pillar": "Nutrition",
+    "ingredients": ["omega-3", "epa", "dha"],
+    "tags": [],
+    "description": "High-strength EPA and DHA from sustainable fish oil.",
+    "price": 28.0
+  },
+  {
+    "id": "vitamin-b12",
+    "name": "Vegan B12",
+    "pillar": "Nutrition",
+    "ingredients": ["vitamin b12"],
+    "tags": ["vegetarian_ok", "vegan_ok"],
+    "description": "A daily B12, useful on plant-based diets.",
+    "price": 11.0
+  },
+  {
+    "id": "vitamin-d3",
+    "name": "Vitamin D3",
+    "pillar": "Nutrition",
+    "ingredients": ["vitamin d"],
+    "tags": ["vegetarian_ok"],
+    "description": "A daily vitamin D3 to top up through darker months.",
+    "price": 12.0
+  },
+  {
+    "id": "journal",
+    "name": "Daily Journal",
+    "pillar": "Mind",
+    "ingredients": [],
+    "tags": ["vegetarian_ok", "vegan_ok"],
+    "description": "A guided journal with space for a daily reflection.",
+    "price": 20.0
+  },
+  {
+    "id": "calm-tea",
+    "name": "Calm Evening Tea",
+    "pillar": "Mind",
+    "ingredients": ["chamomile", "l-theanine"],
+    "tags": ["vegetarian_ok", "vegan_ok"],
+    "description": "A caffeine-free evening tea to help you wind down.",
+    "price": 15.0
+  },
+  {
+    "id": "collagen",
+    "name": "Collagen Peptides",
+    "pillar": "Movement",
+    "ingredients": ["collagen"],
+    "tags": [],
+    "description": "Hydrolysed collagen peptides for joints, skin and hair.",
+    "price": 26.0
+  }
+]
