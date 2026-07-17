@@ -22,5 +22,6 @@ python -m app.cli
 
 ## What works so far
 
-- Streaming chat from the command line.
-- A research corpus and product catalogue with similarity and field search.
+- Answers a health question from the command line, grounded in the research
+  corpus and product catalogue and personalised to the customer profile.
+- Streams the reply and shows each search as it runs.

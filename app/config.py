@@ -19,6 +19,9 @@ EMBED_MODEL: str = "gemini-embedding-001"
 # How many research chunks a search returns.
 TOP_K: int = 4
 
+# Safety limit on tool-calling rounds within a single reply.
+MAX_ITERS: int = 5
+
 # Similarity cutoffs that sort a chunk into high / medium / low relevance.
 BAND_HIGH: float = 0.75
 BAND_MEDIUM: float = 0.63
