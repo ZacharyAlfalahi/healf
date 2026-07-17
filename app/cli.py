@@ -1,6 +1,7 @@
 """Interactive chat loop for the command line."""
 
 import json
+import sys
 
 from google import genai
 from google.genai import errors, types
@@ -12,9 +13,32 @@ from app.research_store import ResearchStore
 from app.tools import Stores
 
 
+def _dim(text: str) -> str:
+    """Dim text on a terminal; leave it plain when output is redirected."""
+    return f"\033[2m{text}\033[0m" if sys.stdout.isatty() else text
+
+
 def _status_line(text: str) -> None:
     """Print a status line while the model is using a tool."""
-    print(f"↳ {text}", flush=True)
+    print(_dim(f"↳ {text}"), flush=True)
+
+
+def _print_prices(turn: list[types.Content], products: ProductStore) -> None:
+    """Print prices for the products the searches surfaced this turn."""
+    names: dict[str, str] = {}
+    for content in turn:
+        for part in content.parts or []:
+            response = part.function_response
+            if response and response.name == "search_products":
+                for product in response.response.get("products", []):
+                    names.setdefault(product["id"], product["name"])
+    if not names:
+        return
+    prices = products.get_prices(list(names))
+    print("\n— Products & prices —")
+    for product_id, name in names.items():
+        if product_id in prices:
+            print(f"{name} — £{prices[product_id]:.2f}")
 
 
 def main() -> None:
@@ -65,7 +89,9 @@ def main() -> None:
             del contents[mark:]
             continue
 
-        print("\n")
+        print()
+        _print_prices(contents[mark:], stores.products)
+        print()
 
 
 if __name__ == "__main__":

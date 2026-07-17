@@ -25,3 +25,7 @@ python -m app.cli
 - Answers a health question from the command line, grounded in the research
   corpus and product catalogue and personalised to the customer profile.
 - Streams the reply and shows each search as it runs.
+- Stays in its lane — declines out-of-lane questions (like drug interactions)
+  with a signpost, and says when it lacks evidence instead of guessing.
+- Prints prices after the answer, looked up outside the model so cost never
+  sways the recommendation.
