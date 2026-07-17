@@ -7,7 +7,7 @@ from google import genai
 from google.genai import errors, types
 
 from app import config, prompts
-from app.agent import message, run_turn
+from app.agent import forget_evidence, message, run_turn
 from app.product_store import ProductStore
 from app.research_store import ResearchStore
 from app.tools import Stores
@@ -43,11 +43,9 @@ def _print_prices(turn: list[types.Content], products: ProductStore) -> None:
 
 def main() -> None:
     """Read a question, stream the answer, and repeat until the user quits."""
-    client = genai.Client(api_key=config.get_api_key())
-    profile = json.loads(config.CUSTOMER_PATH.read_text())
-    instruction = prompts.system_instruction(profile)
-
     try:
+        client = genai.Client(api_key=config.get_api_key())
+        profile = json.loads(config.CUSTOMER_PATH.read_text())
         stores = Stores(
             research=ResearchStore(config.CORPUS_DIR, client),
             products=ProductStore(config.PRODUCTS_PATH),
@@ -55,6 +53,11 @@ def main() -> None:
     except errors.APIError as error:
         print(f"Couldn't start up: {error.message}")
         return
+    except (OSError, ValueError, RuntimeError) as error:
+        print(f"Couldn't start up: {error}")
+        return
+
+    instruction = prompts.system_instruction(profile)
 
     contents: list[types.Content] = []
     print("Healf wellness assistant (Ctrl-C or Ctrl-D to exit).\n")
@@ -91,6 +94,7 @@ def main() -> None:
 
         print()
         _print_prices(contents[mark:], stores.products)
+        forget_evidence(contents, mark)
         print()
 
 

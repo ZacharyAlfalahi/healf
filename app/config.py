@@ -13,6 +13,9 @@ MODEL: str = os.environ.get("GEMINI_MODEL", "gemini-3.1-flash-lite")
 # Replies are short, so this is plenty of room.
 MAX_TOKENS: int = 2048
 
+# Low temperature keeps answers consistent and close to the evidence.
+TEMPERATURE: float = 0.0
+
 # Model used to turn text into vectors for similarity search.
 EMBED_MODEL: str = "gemini-embedding-001"
 
@@ -37,7 +40,5 @@ def get_api_key() -> str:
     """Return the Gemini API key, or raise if it's missing."""
     key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
     if not key:
-        raise RuntimeError(
-            "GEMINI_API_KEY is not set."
-        )
+        raise RuntimeError("Set GEMINI_API_KEY (or GOOGLE_API_KEY).")
     return key

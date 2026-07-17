@@ -11,7 +11,7 @@ results the way a clinician would.
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env        # then add your GEMINI_API_KEY
+cp .env.example .env            # then add your GEMINI_API_KEY
 ```
 
 ## Run
@@ -20,12 +20,23 @@ cp .env.example .env        # then add your GEMINI_API_KEY
 python -m app.cli
 ```
 
-## What works so far
+## Test
 
-- Answers a health question from the command line, grounded in the research
-  corpus and product catalogue and personalised to the customer profile.
-- Streams the reply and shows each search as it runs.
-- Stays in its lane — declines out-of-lane questions (like drug interactions)
-  with a signpost, and says when it lacks evidence instead of guessing.
-- Prints prices after the answer, looked up outside the model so cost never
-  sways the recommendation.
+```bash
+python -m pytest                    # fast offline checks that the app is wired up
+HEALF_RUN_LIVE=1 python -m pytest   # also runs the four demo turns against the API
+```
+
+## How it's built
+
+Each reply is one pass of a stateless loop. The model is given the system
+prompt, the customer profile, and the conversation, and can call two tools:
+`search_research` (similarity search over the research corpus using Gemini
+embeddings) and `search_products` (exact substring search over the catalogue).
+It decides when to search and reasons over the results between calls, then
+streams the answer to the terminal. It stays in its lane — declining
+medications, interactions, and diagnosis with a signpost — and says when the
+library has no evidence rather than guessing. Prices are added by the CLI after
+the answer, looked up by id, so they never enter the model's context.
+
+See `REASONING.md` for the design decisions.

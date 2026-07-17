@@ -1,0 +1,6 @@
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+markers = [
+    "live: exercises the Gemini API (opt in with HEALF_RUN_LIVE=1)",
+]

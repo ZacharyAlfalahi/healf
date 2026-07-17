@@ -10,12 +10,17 @@ class ProductStore:
     """Loads the catalogue and finds products by ingredient, name or tag."""
 
     def __init__(self, catalogue_path: Path):
-        raw = json.loads(Path(catalogue_path).read_text())
-        self._products = [Product(**item) for item in raw]
+        path = Path(catalogue_path)
+        try:
+            self._products = [Product(**item) for item in json.loads(path.read_text())]
+        except (json.JSONDecodeError, TypeError) as error:
+            raise ValueError(f"Bad product catalogue {path.name}: {error}") from error
 
     def search(self, ingredient: str) -> list[Product]:
         """Return products whose name, ingredients or tags contain the term."""
-        term = ingredient.lower()
+        term = ingredient.strip().lower()
+        if not term:
+            return []
         return [
             product
             for product in self._products

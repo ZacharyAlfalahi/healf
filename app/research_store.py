@@ -21,7 +21,17 @@ def _embed(
         config=types.EmbedContentConfig(task_type=task_type),
     )
     vectors = np.array([e.values for e in result.embeddings], dtype=np.float32)
-    return vectors / np.linalg.norm(vectors, axis=1, keepdims=True)
+    norms = np.linalg.norm(vectors, axis=1, keepdims=True)
+    norms[norms == 0] = 1.0  # A zero-length vector would divide to NaN.
+    return vectors / norms
+
+
+def _load_chunk(path: Path) -> ResearchChunk:
+    """Load one corpus document, naming the file if it can't be parsed."""
+    try:
+        return ResearchChunk(**json.loads(path.read_text()))
+    except (json.JSONDecodeError, TypeError) as error:
+        raise ValueError(f"Bad corpus file {path.name}: {error}") from error
 
 
 def _band(score: float) -> str:
@@ -38,15 +48,19 @@ class ResearchStore:
 
     def __init__(self, corpus_dir: Path, client: genai.Client):
         self._chunks = [
-            ResearchChunk(**json.loads(path.read_text()))
+            _load_chunk(path)
             for path in sorted(Path(corpus_dir).glob("*.json"))
         ]
+        if not self._chunks:
+            raise ValueError(f"No research corpus found in {corpus_dir}.")
         texts = [chunk.text for chunk in self._chunks]
         self._vectors = _embed(client, texts, "RETRIEVAL_DOCUMENT")
         self._client = client
 
     def search(self, query: str, top_k: int) -> list[RetrievedChunk]:
         """Return the top_k chunks most similar to the query, best first."""
+        if not query.strip():
+            return []
         query_vector = _embed(self._client, [query], "RETRIEVAL_QUERY")[0]
         scores = self._vectors @ query_vector
         best = np.argsort(scores)[::-1][:top_k]
